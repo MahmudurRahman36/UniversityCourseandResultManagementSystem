@@ -1,0 +1,86 @@
+﻿@using System.Data.SqlClient
+@using System.Security.Cryptography.X509Certificates
+@using System.Web.UI.WebControls
+@using UniversityCourseandResultManagementSystem.BLL
+@using UniversityCourseandResultManagementSystem.Models
+
+@{
+    Layout = null;
+
+    List<StudentEnroll> students = ViewBag.StudentList;
+    List<ResultForVIew> resultForVIews = ViewBag.ViewResults;
+    string message = ViewBag.Message;
+    string name = ViewBag.Names;
+    string email = ViewBag.Emails;
+    string department = ViewBag.Departments;
+    string reg = ViewBag.Regs;
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Export Student Result</title>
+    <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
+
+</head>
+<body>
+
+    <form method="POST" id="SaveResultForm">
+
+        <div class="form-group col-md-8 col-md-offset-2">
+            <h1 style="text-align:center">Student Result</h1>
+            <br />
+            <br />
+            <div>
+                <label>Registration No : </label>
+                <label>@reg </label>
+                @*<input type="text" name="Reg" id="Reg" value=@reg readonly="readonly" class="form-control" />*@
+            </div>
+            <div>
+                <label>Name : </label>
+                <label>@name</label>
+               @* <input type="text" name="Name" id="Name" value= @name readonly="readonly" class="form-control" />*@
+                </div>
+                <div>
+                    <label>Email : </label>
+                    <label>@email </label>
+                 @*<input type="text" name="Email" id="Email" value=@email readonly="readonly" class="form-control" />*@
+                </div>
+                <div>
+                    <label>Department : </label>
+                    <label>@department</label>
+                 @*<input type="text" name="Department" id="Department" value=@department readonly="readonly" class="form-control" />*@
+                </div>
+                <br />
+                <br />
+                <table class="table tab-content table-responsive table-bordered">
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Name</th>
+                        <th>Grade</th>
+                    </tr>
+                    @if (resultForVIews != null)
+                    {
+                        foreach (ResultForVIew resultForVIew in resultForVIews)
+                        {
+                            <tr>
+                                <td>@resultForVIew.CourseCode</td>
+                                <td>@resultForVIew.CourseName</td>
+                                <td>@resultForVIew.Grade</td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+
+
+
+
+        </form>
+
+        <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+
+        <!-- Bootstrap 3.3.6 -->
+        <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    </body>
+    </html>
